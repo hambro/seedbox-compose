@@ -1,4 +1,5 @@
 #!/bin/bash
+WHIPTAIL_DIALOG=dialog
 source includes/functions.sh
 
 ## PARAMETERS
@@ -11,7 +12,7 @@ BWHITE='\e[1;37m'
 NC='\033[0m'
 DATE=`date +%d/%m/%Y-%H:%M:%S`
 BACKUPDATE=`date +%d-%m-%Y-%H-%M-%S`
-IPADDRESS=$(hostname -I | cut -d\  -f1)
+IPADDRESS=$(curl http://checkip.amazonaws.com)
 FIRSTPORT="5050"
 LASTPORT="8080"
 CURRENTDIR="$PWD"
