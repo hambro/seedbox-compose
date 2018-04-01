@@ -4,7 +4,7 @@ lycheedb-%USER%:
   image: mariadb:10
   container_name: lycheedb-%USER%
   volumes:
-    - /home/%USER%/dockers/lychee/db:/var/lib/mysql
+    - %BASE_HOME%/%USER%/dockers/lychee/db:/var/lib/mysql
   ports:
     - 3306:3306
   environment:
@@ -25,6 +25,6 @@ lychee-%USER%:
   ports:
     - %PORT%:8888
   volumes:
-    - /home/%USER%/dockers/lychee/uploads:/uplodas
-    - /home/%USER%/dockers/lychee/data:/data
+    - %BASE_HOME%/%USER%/dockers/lychee/uploads:/uplodas
+    - %BASE_HOME%/%USER%/dockers/lychee/data:/data
 #ENDlychee#

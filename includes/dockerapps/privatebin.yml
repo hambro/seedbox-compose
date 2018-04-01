@@ -12,5 +12,5 @@ privatebin-%USER%:
   ports:
     - %PORT%:8888
   volumes:
-    - /home/%USER%/dockers/privatebin/data:/privatebin/data
+    - %BASE_HOME%/%USER%/dockers/privatebin/data:/privatebin/data
 #ENDprivatebin#

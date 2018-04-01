@@ -11,7 +11,7 @@ sickrage-%USER%:
   ports:
     - %PORT%:8081
   volumes:
-    - /home/%USER%/dockers/sickrage/config:/config
-    - /home/%USER%/downloads/tv:/downloads
-    - /home/%USER%/downloads/medias/tv:/tv
+    - %BASE_HOME%/%USER%/dockers/sickrage/config:/config
+    - %BASE_HOME%/%USER%/downloads/tv:/downloads
+    - %BASE_HOME%/%USER%/downloads/medias/tv:/tv
 #ENDsickrage#

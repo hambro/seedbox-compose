@@ -12,7 +12,7 @@ flood-%USER%:
   ports:
     - %PORT%:3000
   volumes:
-    - /home/%USER%/dockers/flood/db:/flood-db
-    - /home/%USER%/downloads:/data
+    - %BASE_HOME%/%USER%/dockers/flood/db:/flood-db
+    - %BASE_HOME%/%USER%/downloads:/data
   tty: true
 #ENDflood#

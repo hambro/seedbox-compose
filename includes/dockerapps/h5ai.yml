@@ -7,5 +7,5 @@ h5ai-%USER%:
   ports:
     - %PORT%:80
   volumes:
-    - /home/%USER%/downloads/medias:/var/www
+    - %BASE_HOME%/%USER%/downloads/medias:/var/www
 #ENDh5ai#

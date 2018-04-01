@@ -10,5 +10,5 @@ teamspeak-%USER%:
     - PUID=0
   volumes:
     - /etc/localtime:/etc/localtime:ro
-    - /home/%USER%/dockers/teamspeak/config:/config
+    - %BASE_HOME%/%USER%/dockers/teamspeak/config:/config
 #ENDteamspeak#

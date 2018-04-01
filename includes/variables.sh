@@ -21,6 +21,7 @@ LASTPORT="8080"
 
 ### CUSTOMS DIRECTORIES
 CURRENTDIR="$PWD"
+$BASE_HOME="/home"
 BASEDIR="/opt/seedbox-compose"
 CONFDIR="/etc/seedboxcompose"
 SOURCESLIST="/etc/apt/sources.list"

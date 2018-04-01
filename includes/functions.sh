@@ -417,8 +417,8 @@ function choose_services() {
 }
 
 function install_services() {
-	INSTALLEDFILE="/home/$SEEDUSER/resume"
-	DOCKERCOMPOSEFILE="/home/$SEEDUSER/docker-compose.yml"
+	INSTALLEDFILE="$BASE_HOME/$SEEDUSER/resume"
+	DOCKERCOMPOSEFILE="$BASE_HOME/$SEEDUSER/docker-compose.yml"
 	touch $INSTALLEDFILE > /dev/null 2>&1
 	if [[ -f "$FILEPORTPATH" ]]; then
 		declare -i PORT=$(cat $FILEPORTPATH | tail -1)
@@ -449,6 +449,7 @@ function install_services() {
 		sed -i "s|%USER%|$SEEDUSER|g" $DOCKERCOMPOSEFILE
 		sed -i "s|%EMAIL%|$CONTACTEMAIL|g" $DOCKERCOMPOSEFILE
 		sed -i "s|%IPADDRESS%|$IPADDRESS|g" $DOCKERCOMPOSEFILE
+		sed -i "s|%BASE_HOME%|$BASE_HOME|g" $DOCKERCOMPOSEFILE
 		if [[ "$DOMAIN" != "localhost" ]]; then
 			SUBURI=$(whiptail --title "Access Type" --menu \
 		            "Please choose how do you want access your Apps :" 10 45 2 \
@@ -535,7 +536,7 @@ function install_services() {
 function docker_compose() {
 	echo -e "${BLUE}### DOCKERCOMPOSE ###${NC}"
 	ACTDIR="$PWD"
-	cd /home/$SEEDUSER/
+	cd $BASE_HOME/$SEEDUSER/
 	echo -e " ${BWHITE}* Starting docker...${NC}"
 	service docker restart
 	checking_errors $?
@@ -579,7 +580,7 @@ function create_reverse() {
 		fi
 		valid_htpasswd
 	fi
-	USERDIR="/home/$SEEDUSER/downloads/{medias,movies,tv}"
+	USERDIR="$BASE_HOME/$SEEDUSER/downloads/{medias,movies,tv}"
 	if [[ -d "$USERDIR" ]]; then
 		chown $SEEDUSER: $USERDIR -R > /dev/null 2>&1
 		chmod 777 $USERDIR -R > /dev/null 2>&1
@@ -695,8 +696,8 @@ function manage_apps() {
 	                "${TABUSERS[@]}"  3>&1 1>&2 2>&3)
 	[[ "$?" = 1 ]] && break;
 	## RESUME USER INFORMATIONS
-	USERDOCKERCOMPOSEFILE="/home/$SEEDUSER/docker-compose.yml"
-	USERRESUMEFILE="/home/$SEEDUSER/resume"
+	USERDOCKERCOMPOSEFILE="$BASE_HOME/$SEEDUSER/docker-compose.yml"
+	USERRESUMEFILE="$BASE_HOME/$SEEDUSER/resume"
 	echo -e "${BLUE}### Application manager for $SEEDUSER ###${NC}"
 	echo -e " * Docker-Compose file : ${BWHITE}$USERDOCKERCOMPOSEFILE${NC}"
 	echo -e " * Resume file : ${BWHITE}$USERRESUMEFILE${NC}"
@@ -937,12 +938,12 @@ function resume_seedbox() {
 		echo ""
 	fi
 	rm -Rf $SERVICESPERUSER > /dev/null 2>&1
-	# if [[ -f "/home/$SEEDUSER/downloads/medias/supervisord.log" ]]; then
-	# 	mv /home/$SEEDUSER/downloads/medias/supervisord.log /home/$SEEDUSER/downloads/medias/.supervisord.log > /dev/null 2>&1
-	# 	mv /home/$SEEDUSER/downloads/medias/supervisord.pid /home/$SEEDUSER/downloads/medias/.supervisord.pid > /dev/null 2>&1
+	# if [[ -f "$BASE_HOME/$SEEDUSER/downloads/medias/supervisord.log" ]]; then
+	# 	mv $BASE_HOME/$SEEDUSER/downloads/medias/supervisord.log $BASE_HOME/$SEEDUSER/downloads/medias/.supervisord.log > /dev/null 2>&1
+	# 	mv $BASE_HOME/$SEEDUSER/downloads/medias/supervisord.pid $BASE_HOME/$SEEDUSER/downloads/medias/.supervisord.pid > /dev/null 2>&1
 	# fi
-	# chown $SEEDUSER: -R /home/$SEEDUSER/downloads/{tv;movies;medias}
-	# chmod 775: -R /home/$SEEDUSER/downloads/{tv;movies;medias}
+	# chown $SEEDUSER: -R $BASE_HOME/$SEEDUSER/downloads/{tv;movies;medias}
+	# chmod 775: -R $BASE_HOME/$SEEDUSER/downloads/{tv;movies;medias}
 	touch "/etc/seedboxcompose/firstinstall" > /dev/null 2>&1
 	service nginx restart > /dev/null 2>&1
 }
@@ -964,7 +965,7 @@ function backup_docker_conf() {
 	else
 		USERBACKUP=$(whiptail --title "Backup User" --inputbox "Enter username to backup configuration" 10 60 3>&1 1>&2 2>&3)
 	fi
-	DOCKERCONFDIR="/home/$USERBACKUP/dockers/"
+	DOCKERCONFDIR="$BASE_HOME/$USERBACKUP/dockers/"
 	if [[ -d "$DOCKERCONFDIR" ]]; then
 		mkdir -p $BACKUPDIR
 		echo -e " ${BWHITE}* Backing up Dockers conf..."
@@ -985,9 +986,9 @@ function schedule_backup_seedbox() {
 			3>&1 1>&2 2>&3)
 		fi
 		MODELSCRIPT="/opt/seedbox-compose/includes/config/model-backup.sh"
-		BACKUPSCRIPT="/home/$SEEDUSER/backup-dockers.sh"
+		BACKUPSCRIPT="$BASE_HOME/$SEEDUSER/backup-dockers.sh"
 		TMPCRONFILE="/tmp/crontab"
-		if [[ -d "/home/$SEEDUSER" ]]; then
+		if [[ -d "$BASE_HOME/$SEEDUSER" ]]; then
 			grep -R "$SEEDUSER" "$CRONTABFILE" > /dev/null 2>&1
 			if [[ "$?" != "0" ]]; then
 				BACKUPDIR=$(whiptail --title "Schedule Backup" --inputbox \
@@ -1009,6 +1010,8 @@ function schedule_backup_seedbox() {
 				sed -i "s|%DAILYRET%|$DAILYRET|g" "$BACKUPSCRIPT"
 				sed -i "s|%WEEKLYRET%|$WEEKLYRET|g" "$BACKUPSCRIPT"
 				sed -i "s|%MONTHLYRET%|$MONTHLYRET|g" "$BACKUPSCRIPT"
+				sed -i "s|%BASE_HOME%|$BASE_HOME|g" "$BACKUPSCRIPT"
+
 				SCHEDULEBACKUP="@daily bash $BACKUPSCRIPT >/dev/null 2>&1"
 				echo $SCHEDULEBACKUP >> $TMPCRONFILE
 				cat "$TMPCRONFILE" >> "$CRONTABFILE"
@@ -1043,7 +1046,7 @@ function schedule_backup_seedbox() {
 # 	if [[ "$?" == "0" ]]; then
 # 		read -p " * Do you want create a file with your Teamspeak password and Token ? (default no) [y/n] : " SHOWTSTOKEN
 # 		if [[ "$SHOWTSTOKEN" == "y" ]]; then
-# 			TSIDFILE="/home/$SEEDUSER/dockers/teamspeak/idteamspeak"
+# 			TSIDFILE="$BASE_HOME/$SEEDUSER/dockers/teamspeak/idteamspeak"
 # 			touch $TSIDFILE
 # 			SERVERADMINPASSWORD=$(docker logs teamspeak 2>&1 | grep password | cut -d\= -f 3 | tr --delete '"')
 # 			TOKEN=$(docker logs teamspeak 2>&1 | grep token | cut -d\= -f2)
@@ -1082,12 +1085,12 @@ function uninstall_seedbox() {
 					do
 						if [[ "$DOBACKUP" == "yes" ]]; then
 							BACKUPNAME="$BACKUPDIR/backup-seedbox-$seeduser-$backupdate.tar.gz"
-							DOCKERCONFDIR="/home/$seeduser/dockers/"
+							DOCKERCONFDIR="$BASE_HOME/$seeduser/dockers/"
 							echo -e " ${BWHITE}* Backing up dockers configuration for $seeduser...${NC}"
 							tar cvpzf $BACKUPNAME $DOCKERCONFDIR > /dev/null 2>&1
 							checking_errors $?
 						fi
-						USERHOMEDIR="/home/$seeduser"
+						USERHOMEDIR="$BASE_HOME/$seeduser"
 						echo -e " ${BWHITE}* Deleting user...${NC}"
 						userdel -r -f $seeduser
 						checking_errors $?

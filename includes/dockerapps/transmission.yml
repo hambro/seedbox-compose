@@ -13,7 +13,7 @@ transmission-%USER%:
     - 51413:51413
     - 51413:51413/udp
   volumes:
-    - /home/%USER%/dockers/transmission/config:/config
-    - /home/%USER%/downloads:/downloads
-    - /home/%USER%/dockers/transmission/watch:/watch
+    - %BASE_HOME%/%USER%/dockers/transmission/config:/config
+    - %BASE_HOME%/%USER%/downloads:/downloads
+    - %BASE_HOME%/%USER%/dockers/transmission/watch:/watch
 #ENDtransmission#

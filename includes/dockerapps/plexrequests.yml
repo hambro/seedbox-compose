@@ -11,5 +11,5 @@ plexrequests-%USER%:
     - %PORT%:3000
   volumes:
     - /etc/localtime:/etc/localtime:ro
-    - /home/%USER%/dockers/plexrequests/config:/config
+    - %BASE_HOME%/%USER%/dockers/plexrequests/config:/config
 #ENDplexrequest#

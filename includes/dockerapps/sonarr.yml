@@ -12,7 +12,7 @@ sonarr-%USER%:
     - %PORT%:8989
   volumes:
     - /etc/localtime:/etc/localtime:ro
-    - /home/%USER%/dockers/sonarr/config:/config
-    - /home/%USER%/downloads/tv:/downloads
-    - /home/%USER%/downloads/medias/tv:/tv
+    - %BASE_HOME%/%USER%/dockers/sonarr/config:/config
+    - %BASE_HOME%/%USER%/downloads/tv:/downloads
+    - %BASE_HOME%/%USER%/downloads/medias/tv:/tv
 #ENDsonarr#

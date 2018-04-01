@@ -11,7 +11,7 @@ radarr-%USER%:
   ports:
     - %PORT%:7878
   volumes:
-    - /home/%USER%/dockers/radarr/config:/config
-    - /home/%USER%/downloads/movies:/downloads
-    - /home/%USER%/downloads/medias/movies:/movies
+    - %BASE_HOME%/%USER%/dockers/radarr/config:/config
+    - %BASE_HOME%/%USER%/downloads/movies:/downloads
+    - %BASE_HOME%/%USER%/downloads/medias/movies:/movies
 #ENDradarr#
