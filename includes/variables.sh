@@ -15,7 +15,7 @@ DATE=`date +%d/%m/%Y-%H:%M:%S`
 BACKUPDATE=`date +%d-%m-%Y-%H-%M-%S`
 
 ### NETWORK PARAMS
-IPADDRESS=$(hostname -I | cut -d\  -f1)
+IPADDRESS=$(curl http://checkip.amazonaws.com)
 FIRSTPORT="5050"
 LASTPORT="8080"
 
