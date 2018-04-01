@@ -2,7 +2,7 @@
 #STARTlychee#
 lycheedb-%USER%:
   image: mariadb:10
-  container_name: lycheedb-%USER%
+  container_name: seedbox-compose-lycheedb-%USER%
   volumes:
     - %BASE_HOME%/%USER%/dockers/lychee/db:/var/lib/mysql
   ports:
@@ -18,7 +18,7 @@ lychee-%USER%:
   image: wonderfall/lychee
   links:
     - lycheedb-%USER%:lycheedb-%USER%
-  container_name: lychee-%USER%
+  container_name: seedbox-compose-lychee-%USER%
   environment:
     - UID=%UID%
     - GID=%GID%

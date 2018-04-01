@@ -3,7 +3,7 @@
 couchpotato-%USER%:
   restart: always
   image: linuxserver/couchpotato
-  container_name: couchpotato-%USER%
+  container_name: seedbox-compose-couchpotato-%USER%
   environment:
     - PUID=%UID%
     - PGID=%GID%

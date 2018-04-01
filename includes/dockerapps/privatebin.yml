@@ -3,7 +3,7 @@
 privatebin-%USER%:
   restart: always
   image: wonderfall/privatebin
-  container_name: privatebin-%USER%
+  container_name: seedbox-compose-privatebin-%USER%
   environment:
     - UID=%UID%
     - GID=%GID%

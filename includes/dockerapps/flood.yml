@@ -3,7 +3,7 @@
 flood-%USER%:
   restart: always
   image: wonderfall/rtorrent-flood
-  container_name: flood-%USER%
+  container_name: seedbox-compose-flood-%USER%
   environment:
     - UID=%UID%
     - GID=%GID%

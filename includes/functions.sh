@@ -1105,10 +1105,10 @@ function uninstall_seedbox() {
 						userdel $SEEDGROUP
 						checking_errors $?
 						echo -e " ${BWHITE}* Stopping Dockers...${NC}"
-						docker stop $(docker ps) > /dev/null 2>&1
+						docker stop $(docker ps | grep "seedbox-compose") > /dev/null 2>&1
 						checking_errors $?
 						echo -e " ${BWHITE}* Removing Dockers...${NC}"
-						docker rm $(docker ps -a) > /dev/null 2>&1
+						docker rm $(docker ps -a | grep "seedbox-compose") > /dev/null 2>&1
 						checking_errors $?
 						echo -e " ${BWHITE}* Removing Cronjob...${NC}"
 						USERLINE=$(grep -n "$seeduser" $CRONTABFILE | cut -d: -f1)

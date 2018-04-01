@@ -3,7 +3,7 @@
 portainer-%USER%:
   restart: always
   image: portainer/portainer
-  container_name: portainer-%USER%
+  container_name: seedbox-compose-portainer-%USER%
   ports:
     - %PORT%:9000
   volumes:

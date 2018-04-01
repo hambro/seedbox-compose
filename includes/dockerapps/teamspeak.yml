@@ -3,7 +3,7 @@
 teamspeak-%USER%:
   restart: always
   image: linuxserver/gsm-ts3
-  container_name: teamspeak-%USER%
+  container_name: seedbox-compose-teamspeak-%USER%
   net: host
   environment:
     - PGID=0

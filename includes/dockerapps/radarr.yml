@@ -3,7 +3,7 @@
 radarr-%USER%:
   restart: always
   image: linuxserver/radarr
-  container_name: radarr-%USER%
+  container_name: seedbox-compose-radarr-%USER%
   environment:
     - PUID=%UID%
     - PGID=%GID%

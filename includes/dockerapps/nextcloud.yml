@@ -3,7 +3,7 @@
 nextcloud-%USER%:
   restart: always
   image: linuxserver/nextcloud
-  container_name: nextcloud-%USER%
+  container_name: seedbox-compose-nextcloud-%USER%
   environment:
     - PUID=%UID%
     - PGID=%GID%

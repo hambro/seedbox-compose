@@ -3,7 +3,7 @@
 lufi-%USER%:
   restart: always
   image: xataz/lufi
-  container_name: lufi-%USER%
+  container_name: seedbox-compose-lufi-%USER%
   environment:
     - UID=%UID%
     - GID=%GID%

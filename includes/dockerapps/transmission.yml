@@ -3,7 +3,7 @@
 transmission-%USER%:
   restart: always
   image: linuxserver/transmission
-  container_name: transmission-%USER%
+  container_name: seedbox-compose-transmission-%USER%
   environment:
     - PGID=%GID%
     - PUID=%UID%

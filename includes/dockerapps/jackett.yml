@@ -3,7 +3,7 @@
 jackett-%USER%:
   restart: always
   image : linuxserver/jackett
-  container_name: jackett-%USER%
+  container_name: seedbox-compose-jackett-%USER%
   environment:
     - PGID=%UID%
     - PUID=%GID%

@@ -3,7 +3,7 @@
 htpcmanager-%USER%:
   restart: always
   image: linuxserver/htpcmanager
-  container_name: htpcmanager-%USER%
+  container_name: seedbox-compose-htpcmanager-%USER%
   environment:
     - PGID=%GID%
     - PUID=%UID%

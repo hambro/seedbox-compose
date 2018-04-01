@@ -3,7 +3,7 @@
 sonarr-%USER%:
   restart: always
   image: linuxserver/sonarr
-  container_name: sonarr-%USER%
+  container_name: seedbox-compose-sonarr-%USER%
   environment:
     - PUID=%UID%
     - PGID=%GID%

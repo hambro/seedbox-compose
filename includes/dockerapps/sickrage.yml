@@ -3,7 +3,7 @@
 sickrage-%USER%:
   restart: always
   image: linuxserver/sickrage
-  container_name: sickrage-%USER%
+  container_name: seedbox-compose-sickrage-%USER%
   environment:
     - PUID=%UID%
     - PGID=%GID%

@@ -3,7 +3,7 @@
 lutim-%USER%:
   restart: always
   image: xataz/lutim
-  container_name: lutim-%USER%
+  container_name: seedbox-compose-lutim-%USER%
   environment:
     - UID=%UID%
     - GID=%GID%

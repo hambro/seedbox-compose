@@ -3,7 +3,7 @@
 headphones-%USER%:
   restart: always
   image: linuxserver/headphones
-  container_name: headphones-%USER%
+  container_name: seedbox-compose-headphones-%USER%
   environment: 
     - PGID=%GID%
     - PUID=%UID%

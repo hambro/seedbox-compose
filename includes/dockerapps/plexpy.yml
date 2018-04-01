@@ -3,7 +3,7 @@
 plexpy-%USER%:
   restart: always
   image: linuxserver/plexpy
-  container_name: plexpy-%USER%
+  container_name: seedbox-compose-plexpy-%USER%
   environment:
     - PGID=%UID%
     - PUID=%GID%

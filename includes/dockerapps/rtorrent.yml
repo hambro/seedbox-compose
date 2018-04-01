@@ -3,7 +3,7 @@
 rutorrent-%USER%:
   restart: always
   image: diameter/rtorrent-rutorrent
-  container_name: rutorrent-%USER%
+  container_name: seedbox-compose-rutorrent-%USER%
   environment:
     - USR_ID=%UID%
     - GRP_ID=%GID%

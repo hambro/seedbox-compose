@@ -3,7 +3,7 @@
 plex-%USER%:
   restart: always
   image: linuxserver/plex
-  container_name: plex-%USER%
+  container_name: seedbox-compose-plex-%USER%
   environment:
     - VERSION=latest
     - PUID=%UID%

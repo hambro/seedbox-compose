@@ -3,7 +3,7 @@
 watchtower:
   restart: always
   image: v2tec/watchtower
-  container_name: watchtower
+  container_name: seedbox-compose-watchtower
   ports:
     - 8765:5051
   volumes:
