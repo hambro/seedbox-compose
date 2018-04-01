@@ -11,5 +11,5 @@ htpcmanager-%USER%:
   ports:
     - %PORT%:8085
   volumes:
-    - /home/%USER%/dockers/htpcmanager/config:/config:rw
+    - /mnt/pool/%USER%/dockers/htpcmanager/config:/config:rw
 #ENDhtpcmanager#

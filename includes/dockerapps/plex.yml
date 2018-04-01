@@ -17,7 +17,7 @@ plex-%USER%:
     - 5353:5353/udp
     - 1900:1900/udp
   volumes:
-    - /home/%USER%/dockers/plex/config:/config
-    - /home/%USER%/downloads/medias/tv:/data/tvshows
-    - /home/%USER%/downloads/medias/movies:/data/movies
+    - /mnt/pool/%USER%/dockers/plex/config:/config
+    - /mnt/pool/%USER%/downloads/medias/tv:/data/tvshows
+    - /mnt/pool/%USER%/downloads/medias/movies:/data/movies
 #ENDplex#

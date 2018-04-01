@@ -11,7 +11,7 @@ headphones-%USER%:
   ports:
     - %PORT%:8181
   volumes:
-    - /home/%USER%/dockers/headphones/config:/config:rw
-    - /home/%USER%/downloads/music:/downloads
-    - /home/%USER%/downloads/medias/music:/music
+    - /mnt/pool/%USER%/dockers/headphones/config:/config:rw
+    - /mnt/pool/%USER%/downloads/music:/downloads
+    - /mnt/pool/%USER%/downloads/medias/music:/music
 #ENDheadphones#

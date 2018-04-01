@@ -12,5 +12,5 @@ flood-%USER%:
     - %PORT%:3000
     - 49184:49184
   volumes:
-    - /home/%USER%/downloads:/data
-    - /home/%USER%/dockers/flood/flooddb:/flood-db
+    - /mnt/pool/%USER%/downloads:/data
+    - /mnt/pool/%USER%/dockers/flood/flooddb:/flood-db

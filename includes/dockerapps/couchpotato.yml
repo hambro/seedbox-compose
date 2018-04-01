@@ -11,7 +11,7 @@ couchpotato-%USER%:
   ports:
     - %PORT%:5050
   volumes:
-    - /home/%USER%/dockers/couchpotato/config:/config
-    - /home/%USER%/downloads/movies:/downloads
-    - /home/%USER%/downloads/medias/movies:/movies
+    - /mnt/pool/%USER%/dockers/couchpotato/config:/config
+    - /mnt/pool/%USER%/downloads/movies:/downloads
+    - /mnt/pool/%USER%/downloads/medias/movies:/movies
 #ENDcouchpotato#

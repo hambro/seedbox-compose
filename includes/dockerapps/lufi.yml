@@ -14,6 +14,6 @@ lufi-%USER%:
   ports:
     - %PORT%:8080
   volumes:
-    - /home/%USER%/dockers/lufi/data:/data
-    - /home/%USER%/dockers/lufi/files:/files
+    - /mnt/pool/%USER%/dockers/lufi/data:/data
+    - /mnt/pool/%USER%/dockers/lufi/files:/files
 #ENDlufi#

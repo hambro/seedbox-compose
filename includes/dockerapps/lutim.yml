@@ -14,6 +14,6 @@ lutim-%USER%:
   ports:
     - %PORT%:8181
   volumes:
-    - /home/%USER%/dockers/lutim/data:/data
-    - /home/%USER%/dockers/lutim/files:/lutim/files
+    - /mnt/pool/%USER%/dockers/lutim/data:/data
+    - /mnt/pool/%USER%/dockers/lutim/files:/lutim/files
 #ENDlutim#
