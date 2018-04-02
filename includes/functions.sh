@@ -9,9 +9,19 @@ function under_developpment() {
 }
 
 function check_dir() {
+	set +x
+	# Create basedir if it doesn't exist
+	if [[ ! -d "$BASEDIR" ]]; then
+		mkdir $BASEDIR > /dev/null 2>&1
+		echo $(pwd)
+		cp includes/ $BASEDIR -R > /dev/null 2>&1
+	fi
+
+	# cd into basedir if we're not there already
 	if [[ $1 != $BASEDIR ]]; then
 		cd $BASEDIR
 	fi
+	set -x
 }
 
 function conf_dir() {
@@ -196,8 +206,8 @@ function checking_system() {
 	apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D > /dev/null 2>&1
 	checking_errors $?
 	echo -e " ${BWHITE}* Updating & upgrading system${NC}"
-	apt-get update > /dev/null 2>&1
-	apt-get upgrade -y > /dev/null 2>&1
+	# TODO apt-get update > /dev/null 2>&1
+	# TODO apt-get upgrade -y > /dev/null 2>&1
 	checking_errors $?
 	echo -e " ${BWHITE}* Installing certbot${NC}"
 	if [[ "$SYSTEMOS" == "Ubuntu" ]]; then
@@ -313,24 +323,29 @@ function define_parameters() {
 }
 
 function create_user() {
+	# Check if a group for the project exists, by looking for GROUPFILE
 	echo -e " ${BWHITE}* Checking group Seedbox group file${NC}"
 	if [[ ! -f "$GROUPFILE" ]]; then
+		# GROUPFILE did not exist
 		touch $GROUPFILE
 		SEEDGROUP=$(whiptail --title "Group" --inputbox "Create a group for your Seedbox" 7 50 3>&1 1>&2 2>&3)
 		echo "$SEEDGROUP" > "$GROUPFILE"
 	else
+		# GROUPFILE exists
 		TMPGROUP=$(cat $GROUPFILE)
 		if [[ "$TMPGROUP" == "" ]]; then
+			# File is empty
 			SEEDGROUP=$(whiptail --title "Group" --inputbox "Create a group for your Seedbox" 7 50 3>&1 1>&2 2>&3)
+			echo "$SEEDGROUP" > "$GROUPFILE"
     fi
 	fi
   egrep "^$SEEDGROUP" /etc/group >/dev/null
+  # Check if group exists
 	if [[ "$?" != "0" ]]; then
 		echo -e " ${BWHITE}* Creating group $SEEDGROUP"
 	  groupadd $SEEDGROUP
 	  checking_errors $?
 	else
-		SEEDGROUP=$TMPGROUP
 	    echo -e "	${YELLOW}--> No need to create group $SEEDGROUP, already exist.${NC}"
 	fi
 	echo -e " ${BWHITE}* Checking Seedbox user file${NC}"
@@ -350,7 +365,7 @@ function create_user() {
 	else
 		PASS=$(perl -e 'print crypt($ARGV[0], "password")' $PASSWORD)
 		echo -e " ${BWHITE}* Adding $SEEDUSER to the system"
-		useradd -m -G $SEEDGROUP -p $PASS $SEEDUSER > /dev/null 2>&1
+		useradd -m -b "$BASE_HOME" -G $SEEDGROUP -p $PASS $SEEDUSER > /dev/null 2>&1
 		checking_errors $?
 		USERID=$(id -u $SEEDUSER)
 		GRPID=$(id -g $SEEDUSER)

@@ -3,7 +3,6 @@ source includes/functions.sh
 source includes/variables.sh
 
 clear
-
 if [ $USER = "root" ] ; then
 	check_dir $PWD
 	script_option
